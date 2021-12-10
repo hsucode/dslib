@@ -4,116 +4,516 @@
 
 # Interface
 
-``` cs
+包含了大量的文件函数
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
 
-//创建加强肋
-ArrayList CreateRibBySurface(MECMOD.Part part, HybridShape isurface);
-
-AnyObject InstantiateCushion(MECMOD.Part part, AnyObject UDF, string[] UDFValue, string[] UDFParametersName, string[] UDFParametersValue,string InputAxisName);
-void InstantiateCushionInOneSet(Part part, AnyObject UDFSets, string AxisName,string GeoSetName);
-
-void InstallCushion(ArrayList BeamGeoList);
-
-HybridShape CreatNewRoadBoundary(HybridShape OriCurve, HybridShape CenterCurve, ArrayList CenterAlignmentAxisSystemesList,ArrayList CheckResultBoolean);
-
-// void CreatAxisFromExcel();
-// void ExportAxisAngleAndHeight();
-// interface CATIRailwayBridgeModeler
-
-void CreateInternalBeamSpace(Part part, HybridShape Curve, HybridShape bottomCrv, HybridShape StartPoint, OrderedGeometricalSet hb, out ArrayList iPlanelist);
-HybridShape CreatePolyLineBaseOnPlane(HybridShapeFactory hsf, HybridShape iPlane, HybridShape iPt, OrderedGeometricalSet hb);
-HybridShape CreateLoftFromMultiSection(Part part, ArrayList iSectionlist, OrderedGeometricalSet hb);
-HybridShape CreateLoftFromMultiSectionBaseOnUDF(Part part, ArrayList iUDFset, OrderedGeometricalSet hb, HybridShape ispline, int CouplingCount);
-void CreateInternalSection(Part part, HybridShape iTopCurve, HybridShape iBottomCurve, HybridShape iPlane, OrderedGeometricalSet DestinationHybridBody);
-AnyObject InstantiateUDFInternalSection(MECMOD.Part part, string pwname, string iname, string iversion, HybridShape iTopCurve, HybridShape iBottomCurve, HybridShape iPlane);
-void CreatePanelFromList(Part part, ArrayList DistanceList, HybridShape iPlane, OrderedGeometricalSet destinationHB, bool dir, HybridShape topcurve, HybridShape bottomcurve);
-
-// interface CATRailWayStandardBeamBridge
-  
-void CreateStandardBeam(Part part, HybridShape iStartPoint, HybridShape iSurface, HybridShape iCurve, HybridShape iPlanerCurve, HybridBody iOHB, double iDistance1, double iDistance2, double iDistance3, double iDistance4);
-
-HybridShape CreateSectionFromPointList(HybridShapeFactory hsf);
-
-void CreateStandardBeam(Part part, HybridShape iStartPoint, HybridShape iSurface, HybridShape iCurve, HybridShape iPlanerCurve, HybridBody iOHB, double iDistance1, double iDistance2, double iDistance3, double iDistance4);
-
-HybridShape CreateSectionFromPointList(HybridShapeFactory hsf);
-
-void CreateInternalShapesT1(Part part, ArrayList distanceArray, bool dircheck, HybridShape opt);
-void CreateInternalShapesT2(Part part, ArrayList distanceArray, bool dircheck, HybridShape opt);
-void CreateInternalShapesT3(Part part, ArrayList distanceArray, bool dircheck, HybridShape opt);
-
-void CreateStandardBeam(Part part, HybridShape iStartPoint, HybridShape iSurface, HybridShape iCurve, HybridShape iPlanerCurve, HybridBody iOHB, double iDistance1, double iDistance2, double iDistance3, double iDistance4);
-
-HybridShape CreateSectionFromPointList(HybridShapeFactory hsf);
-
-
-
-MECMOD.Part GetContainPart(INFITF.AnyObject obj);
-Application InitializationCATIA();
-Application InitializationEXCEL();
-// string color { get; set; }
-
-Selection GetSelection();
-
-// public interface CATIGeometry
-
-void SayHi(string me);
-AxisSystem CreateAxisAlongCurve(Part Part, HybridShape Curve, HybridShape Point, double AxisRotateAngle);
-INFITF.AnyObject LoadExtRef(INFITF.Selection sel, INFITF.AnyObject OldObj, MECMOD.HybridBody ExtRefSet);
-Boolean CheckIntersection(Object Object1, Object Object2, MECMOD.Part Part);
-void GetAllPlnFromAxis(Part part, MECMOD.AxisSystem refaxis, out HybridShape xypln, out HybridShape yzpln, out HybridShape zxpln);
-
-HybridShape GetCOfGPoint(MECMOD.Part part, INFITF.AnyObject surface);
-ArrayList GetUDFParamters(MECMOD.HybridShapeInstance udf, ref string ValueList);
-void ExtractUDFAxisAndRefAxis(MECMOD.Part part, HybridShapeInstance udf, AxisSystem refaxis, out HybridShapePointCoord pt, out HybridShape xypln, out HybridShape yzpln, out HybridShape zxpln);
-double[] GetUDFOutputAxisCoord(MECMOD.Part part, MECMOD.HybridShapeInstance udf, INFITF.AnyObject RefAxisSystem, string OutputName = "AXIS");
-double[] GetUDFOutputAxisCoord(MECMOD.Part part, MECMOD.ShapeInstance udf, INFITF.AnyObject RefAxisSystem, string OutputName = "AXIS");
-INFITF.AnyObject CompareTwoGeometrySets(INFITF.AnyObject A, INFITF.AnyObject B);
-Boolean CheckCreateLineFormPointToSurface(Object Point, Object Surface, MECMOD.Part Part);
-ArrayList CreatePointsFromList(Object icrv, ArrayList idistance,MECMOD.Part part);
+-a---           2021/7/30    18:24            721 AddParametersFromExcel.bas
+-a---          2020/11/15     0:04            864 BatchRunKP_V6_Internal.bas
+-a---           2021/7/30    18:24            657 ChangeObjectNameExcel.bas
+-a---           2021/9/12    12:14            648 ChangePartParms.bas
+-a---           2021/7/30    18:24           2903 ChangePrdPrtParm.bas
+-a---          2020/12/20    23:02           6298 DeleteBeamAllPrd.bas
+-a---          2020/12/20    23:02           2818 DeleteBeamFromProduct.bas
+-a---          2020/12/20    23:02            189 DeleteDrawingElements.bas
+-a---          2020/12/20    23:02           1306 DeleteObject.bas
+-a---          2020/12/20    23:02           4768 DeletePartTmp.bas
+-a---           2021/7/30    19:58           2922 EXPORT_BEAM_DATA.bas
+-a---           2021/7/30    18:23           2370 EXPORT_PILE_COOR.bas
+-a---           2021/7/30    18:23           1033 Find_ParmSet.bas
+-a---           2021/12/6    16:52           2086 GetDimension.bas
+-a---          2020/12/20    23:03           1124 GetDistance.bas
+-a---           2021/9/12    12:41            441 GetLineLength.bas
+-a---           2021/7/30    18:22           1022 KP_Run.bas
+-a---          2020/12/20    23:03            697 PrintParameters.bas
+-a---          2020/12/20    23:03            127 PrintTypeName.bas
+-a---           2021/9/12    19:51            251 SearchParameters.bas
+-a---           2021/7/30    18:21           1640 UpdateGeometricalSet.bas
 
 
 
 
-//  public interface CATIMeasure
+d----           2021/7/28    23:17                Automation Functions
+-a---           2019/6/23    21:07             17 00_change.bat
+-a---           2019/6/23    23:26           3880 AddLouvreWithEndOffsetByCurveFro.vb
+-a---           2019/6/23    10:59            438 AddNewPointOnCurveSmall.vb
+-a---           2019/6/23    11:00            717 AddSetIfNotThere.vb
+-a---           2019/6/23    11:01            276 AppendStringParm.vb
+-a---           2019/6/23    11:01            201 BrowseForFile.vb
+-a---           2019/6/23    11:02            290 BrowseForFolder.vb
+-a---           2019/6/23    11:02            302 CanGetAngle.vb
+-a---           2015/11/4     9:34          23314 CATApp.vb
+-a---           2016/8/21    11:32           1079 CATIA_VBA_CATAPP_CLASS.vb
+-a---           2019/6/23    11:03            787 CheckExcelDuplicates.vb
+-a---           2019/6/23    11:03            255 CheckFill.vb
+-a---           2019/6/23    11:03            751 CheckFolders.vb
+-a---           2019/6/23    11:04            679 CheckInfiniteLineNormalIntersection.vb
+-a---           2019/6/23    11:06            341 CheckIntersection.vb
+-a---           2019/6/23    11:07            421 CheckIntersectionWithMoreOptions.vb
+-a---           2019/6/23    11:07            338 CheckLineNormal.vb
+-a---           2019/6/23    11:07            206 CheckProduct.vb
+-a---           2019/6/23    11:08            328 CheckProjection.vb
+-a---           2019/6/23    11:08            378 CheckProjectionByDirection.vb
+-a---           2019/6/23    11:09            662 CleanOGS.vb
+-a---           2019/6/23    11:10            811 ClosestPoints.vb
+-a---           2019/6/23    11:10            235 Color_to_RGB.vb
+-a---           2019/6/23    11:10            687 CrossProduct.vb
+-a---           2019/6/23    11:11            259 CrvCheck.vb
+-a---           2019/6/23    11:11            367 CutObjectAndPaste.vb
+-a---           2019/6/23    11:11            113 deg_to_rad.vb
+-a---           2019/6/23    11:12            207 DeleteHSObjectsArray.vb
+-a---           2019/6/23    11:12            348 DeleteNonSurface (from Array).vb
+-a---           2019/6/23    11:14            512 DeleteNonSurfaces (from Geom Set).vb
+-a---           2019/6/23    11:14            281 DistanceFromEquationOfLine.vb
+-a---           2019/6/23    11:14            974 DoArcWallsIntersect.vb
+-a---           2019/6/23    11:14            106 DotProduct.vb
+-a---           2019/6/23    11:15            823 EmailNotify.vb
+-a---           2019/6/23    11:15            409 ExistsInArray.vb
+-a---           2019/6/23    11:16            475 ExportPtCoordToXLS.vb
+-a---           2021/11/6    13:21            264 ExportToPDF.vb
+-a---           2019/6/23    11:16            444 FilletCheck.vb
+-a---           2019/6/23    11:16           1946 FilletStabilizer.vb
+-a---           2019/6/23    11:17            623 FindClosestObjectInGeomSet.vb
+-a---           2019/6/23    11:17            287 FixInstanceFactory.vb
+-a---           2019/6/23    11:17            194 FolderVerify.vb
+-a---           2019/6/23    11:18            715 ForceColorArray.vb
+-a---           2019/6/23    11:18            839 ForceColorArrayUgly.vb
+-a---           2019/6/23    11:18            771 ForceColorObjUgly.vb
+-a---           2019/6/23    11:19            872 FurthestPoints.vb
+-a---           2019/6/23    11:19            578 GenerateCATPartFromProduct.vb
+-a---           2019/6/23    11:19            365 GenerateLengthParametersFromDblArray.vb
+-a---           2019/6/23    11:20            867 GeneratePublication.vb
+-a---           2019/6/23    11:20            323 GenerateRealParametersFromDblArray.vb
+-a---           2019/6/23    11:21            292 GetAcuteAngle.vb
+-a---           2019/6/23    11:21            740 GetAngleBetween.vb
+-a---           2019/6/23    11:21            726 GetCOGFromArray.vb
+-a---           2021/11/6    13:26            243 GetContainingPart.vb
+-a---           2019/6/23    11:22            420 GetFirstInstanceInExcel.vb
+-a---           2019/6/23    11:22           1425 GetMaxProjDistance.vb
+-a---           2019/6/23    11:23            561 GetMinimumDistanceAtLineEndPts.vb
+-a---           2019/6/23    11:23            328 GetPartFromName.vb
+-a---           2019/6/23    11:23            135 GetSlope.vb
+-a---           2019/6/23    11:24           2710 GetTechnologicalObject Parameters.vb
+-a---           2019/6/23    11:24            807 GetXYZFromArray.vb
+-a---           2019/6/23    11:25            340 GetXYZFromPoint.vb
+-a---           2019/6/23    11:25            157 GetYIntercept.vb
+-a---           2019/6/23    11:25            261 HasAngleBetween.vb
+-a---           2019/6/23    11:26            254 HasArea.vb
+-a---           2019/6/23    11:26            229 HasCOG.vb
+-a---           2019/6/23    11:27            185 HasHOffset.vb
+-a---           2019/6/23    11:27            379 HasPackage.vb
+-a---           2019/6/23    11:28            187 HasParent.vb
+-a---           2019/6/23    11:29            269 HasRadius.vb
+-a---           2019/6/23    11:29            312 HasVolume.vb
+-a---           2019/6/23    11:29            214 HybridShapeExists.vb
+-a---           2019/6/23    11:30            248 HybridShapeExistsInHybridBody.vb
+-a---           2019/6/23    11:30            588 ImmediateAnnotation.vb
+-a---           2019/6/23    11:30            167 Is64Bit.vb
+-a---           2019/6/23    11:31            194 IsAppOpen.vb
+-a---           2019/6/23    11:31            288 IsConvertibleToNumber.vb
+-a---           2019/6/23    11:31            531 IsCurveAbove.vb
+-a---           2019/6/23    11:32            601 IsIntersectionResultCurve.vb
+-a---           2019/6/23    11:33            594 IsMidPtCoordToFarFromCurve.vb
+-a---           2019/6/23    11:33            182 IsNumber.vb
+-a---           2019/6/23    11:33            554 IsObjInSetWithinDist.vb
+-a---           2019/6/23    11:34            205 IsPartDocument.vb
+-a---           2019/6/23    11:34            207 IsPlanar.vb
+-a---           2019/6/23    11:34            715 IsProductActive.vb
+-a---           2019/6/23    11:35            217 IsProductDocument.vb
+-a---           2019/6/23    11:35            240 IsSmartUpdatable.vb
+-a---           2019/6/23    11:35            173 IsSpace.vb
+-a---           2019/6/23    11:36            516 IsSurfaceAbove.vb
+-a---           2019/6/23    11:36            183 IsUpdatable.vb
+-a---           2019/6/23    11:36            215 IsUpdatableInPart.vb
+-a---           2019/6/23    11:38            449 KeepBiggestSplit.vb
+-a---           2019/6/23    11:47            626 KeepCurveSplitByLength.vb
+-a---           2019/6/23    11:48            757 KeepHighestLevel.vb
+-a---           2019/6/23    11:48            669 KeepSmallerCurvePar.vb
+-a---           2019/6/23    11:50            449 KeepSmallestSplit.vb
+-a---           2019/6/23    11:50            502 KeepSolidSplitByIntersection.vb
+-a---           2019/6/23    11:51            907 KeepSolidSplitByVolume.vb
+-a---           2019/6/23    11:51           1370 KeepSolidSplitByVolumeInPart.vb
+-a---           2019/6/23    11:52            620 KeepSplitByArea.vb
+-a---           2019/6/23    11:52           1017 KeepTrimOrientation.vb
+-a---           2019/6/23    11:53            794 LineFromArcEndPts.vb
+-a---           2019/6/23    11:53            490 LoadExtRef.vb
+-a---           2019/6/23    11:54            611 MakeArrayFromExcelColumn.vb
+-a---           2019/6/23    11:54            369 MakeArrayFromSearch.vb
+-a---           2019/6/23    11:54            324 MakeArrayMidDoubles.vb
+-a---           2019/6/23    11:55            611 MakeTangentLineAtPt.vb
+-a---           2019/6/23    11:55            935 MatchBlendOrientationsWithEndPts.vb
+-a---           2017/6/18    17:18           1782 ModifyFeatureParameters.vb
+-a---           2019/6/23    11:56           1242 MoveArcSlabCloserToObjByInverse.vb
+-a---           2019/6/23    11:57            940 MoveArcWallCloserToCoordByInverse.vb
+-a---           2019/6/23    11:57           1082 MoveAxisSystemXDirFartherFromCoord.vb
+-a---           2019/6/23    11:57            686 MoveCircle2PointsRadCloserToObj.vb
+-a---           2019/6/23    12:00            819 MoveCurveParCloserToCoord.vb
+-a---           2019/6/23    12:01            695 MoveCurveParCloserToObj.vb
+-a---           2019/6/23    12:02            629 MoveExtremumCloserToObj.vb
+-a---           2019/6/23    12:03            850 MoveExtrudeCloserToCoord.vb
+-a---           2019/6/23    12:03            928 MoveLineAngleCloserToCoord.vb
+-a---           2019/6/23    12:04            673 MoveLineAngleCloserToObj.vb
+-a---           2019/6/23    12:05            697 MoveLineAngleCloserToObjByNegAngle.vb
+-a---           2019/6/23    12:06            671 MoveLinePtDirCloserToObj.vb
+-a---           2019/6/23    12:09            941 MoveLineTangencyCloserToCoord.vb
+-a---           2019/6/23    12:09            856 MoveOffsetCloserToCoord.vb
+-a---           2019/6/23    12:09            726 MoveOffsetCloserToObj.vb
+-a---           2019/6/23    12:10            677 MovePlaneOffsetCloserToObj.vb
+-a---           2019/6/23    12:10            679 MovePointOnCurveCloserToObj.vb
+-a---           2019/6/23    12:11            736 MultiRotate.vb
+-a---           2019/6/23    12:11            285 ParameterFromSubName.vb
+-a---           2019/6/23    12:11            526 PlacePointOnCurve.vb
+-a---           2019/6/23    12:12            251 RemoveChars.vb
+-a---           2019/6/23    12:12            826 ReturnAllObjectsWithinDist.vb
+-a---           2019/6/23    12:12            502 ReturnMidCurveDist.vb
+-a---           2019/6/23    12:13            262 ReturnMidPtCoord.vb
+-a---           2019/6/23    12:13           1356 SelectElement3 Values.vb
+-a---           2019/6/23    12:13           1262 SelSurfDup.vb
+-a---            2016/5/6    15:12             19 testvisuperfodraw.txt
+-a---            2016/5/6    15:12             19 testvisuperfodraw.vb
+-a---           2021/7/28    23:18           3482 UDF.vb
+-a---           2015/11/5    22:51          19780 Useful Catia VBA Functions.vb
+-a---            2017/3/8    16:05          29315 V6_PRODUCT_VBA.mmap
 
-double GetDistance(INFITF.AnyObject obj1, INFITF.AnyObject obj2);
-double GetLineLength(INFITF.AnyObject obj);
-double GetCurveLength(INFITF.AnyObject obj);
-double GetAngle(INFITF.AnyObject obj1, INFITF.AnyObject obj2);
-double GetArea(INFITF.AnyObject surface);
-double GetVolume(INFITF.AnyObject Volumesurface);
-    
-// public interface CATIParameters
 
-void SetAttributeStringToObject(MECMOD.Part part, INFITF.AnyObject obj, string name, string value);
-void SetAttributeBooleanToObject(MECMOD.Part part, HybridShape obj, string name, Boolean value);
-void SetAttributeLengthToObject(MECMOD.Part part, INFITF.AnyObject obj, string name, double value);
-void SetAttributeAngleToObject(MECMOD.Part part, INFITF.AnyObject obj, string name, double value);
-void SetAttributeVolumeToObject(MECMOD.Part part, INFITF.AnyObject obj, string name, double value);
-void ChangeUDFParameters(HybridShapeInstance udf, string ParameterName, string ParameterValue);
-void ExportUDFParms(int xlsHeaderIndex, int startExcelIndex, Microsoft.Office.Interop.Excel.Worksheet xlsheet, MECMOD.HybridShapeInstance udf);
-void ExportUDFParms(int xlsHeaderIndex, int startExcelIndex, Microsoft.Office.Interop.Excel.Worksheet xlsheet, MECMOD.ShapeInstance udf);
-void ImportUDFParmsFormExcel(int xlsHeaderIndex, int startExcelIndex, Microsoft.Office.Interop.Excel.Worksheet xlsheet, MECMOD.HybridShapeInstance udf, object unit);
-void ImportUDFParmsFormExcel(int xlsHeaderIndex, int startExcelIndex, Microsoft.Office.Interop.Excel.Worksheet xlsheet, MECMOD.ShapeInstance udf, object unit);
-void ExportUDFParms(int xlsHeaderIndex, int startExcelIndex, Microsoft.Office.Interop.Excel.Worksheet xlsheet, HybridBody udfset);
-void ExportUDFParms(int xlsHeaderIndex, int startExcelIndex, Microsoft.Office.Interop.Excel.Worksheet xlsheet, OrderedGeometricalSet udfset);
-void ExportUDFParms(int xlsHeaderIndex, int startExcelIndex, Microsoft.Office.Interop.Excel.Worksheet xlsheet, Body udfset);
-void ChangeUDFParmsFormExcel(int xlsHeaderIndex, int startExcelIndex, Microsoft.Office.Interop.Excel.Worksheet xlsheet, HybridBody udfset);
-void ChangeUDFParmsFormExcel(int xlsHeaderIndex, int startExcelIndex, Microsoft.Office.Interop.Excel.Worksheet xlsheet, MECMOD.OrderedGeometricalSet udfset);
-void GetUDFConfiguration(string XMLPath, string Type, ref string PartName, ref string PartiVision, ref string PWName);
+d----            2021/4/6    17:15                AssemblyConstraints
+da---          2020/11/21    22:40                AssemblyScript
+da---           2021/7/30    18:13                CATIA_EXCEL
+da---          2020/11/20     0:18                command
+d----            2021/4/6    17:15                DPM_MHI
+d----            2021/4/6    17:15                FrameTitleBlock
+d----            2021/4/6    17:15                FTA
+d----            2021/4/6    17:15                ImmersiveLogon
+da---          2020/11/17     6:43                PointInstantiatorFromExcelR5
+d----            2021/4/6    17:15                PowerCopy
+d----            2021/4/6    17:15                SmarTeam
+d----            2021/4/6    17:15                UserFeature
+da---          2020/11/17     6:43                vba
+-a---           2021/7/30    18:14            800 BatchRunKP.CATScript
+-a---           2012/7/16    13:33          13640 CAAGsiCreateStair.CATScript
+-a---           2013/4/19    18:47            724 CATIA_Version.CATScript
+-a---           2013/9/27    22:57          23018 CATSelectObjectCase.CATScript
+-a---          2020/10/29    13:09            423 Create_New_Body.CATScript
+-a---           2021/7/30    18:13           2240 CreateAxisFromExcel.CATScript
+-a---           2013/3/29    18:42           6457 CreateGridlineinCATIAdrawing.catscript
+-a---           2014/7/10    16:34           3593 CreateNewParameter.CATScript
+-a---          2005/10/25    18:41           3415 CreatePointsCurvesSweptSurface.CATScript
+-a---            2020/7/3     0:20           6296 DeleteBeamUDFFromProduct.CATScript
+-a---            2020/7/3     0:33           5021 DeleteCurrentPartBeamUDF.CATScript
+-a---           2014/7/10    16:34           3678 DeleteExistParameter.CATScript
+-a---            2020/7/3     1:12           1660 DeleteObject.CATScript
+-a---            2013/6/5    21:10          35469 DrawingTitle.CATScript
+-a---          2013/12/22     9:57           8631 e3develop.catvbs
+-a---           2021/7/30    17:53            932 ExtractBodyBoundary.CATScript
+-a---           2021/7/30    17:06           9061 FORMWORKEXTRACTION.CATScript
+-a---          2014/12/11    13:08          14395 GAS-7.CATScript
+-a---           2014/4/13    21:54           4351 General-Parameters_and_Measure-Knowledge_Environment.catvbs
+-a---           2013/3/25    19:33           1733 GenerateUVPts.CATScript
+-a---           2020/7/23    14:09            965 GetDistance.CATScript
+-a---            2020/7/2    17:58             54 GetTypeName.CATScript
+-a---            2020/7/2    17:55             44 HelloWorld.CATScript
+-a---           2020/8/21     1:14            997 Instantiate_UDF.CATScript
+-a---          2020/11/14    23:02            954 InstantiateUDFAndPowerCopy.CATScript
+-a---            2014/3/8    15:26           2562 InstantiationofaPowerCopy.catvbs
+-a---           2019/6/18    10:53           1134 Macro2.catvbs
+-a---           2014/8/16    13:51           5191 PrintTree.catvbs
+-a---           2014/12/3    12:44          30584 PslTubingExtract.CATScript
+-a---           2017/6/28    13:11           5540 RailwayDesign-V1.catscript
+-a---           2017/6/25    16:01           3660 REACTION.catscript
+-a---           2015/1/25    14:01           3744 Rename_Instance.CATScript
+-a---           2019/7/20     9:55            251 Rename_Object.catvbs
+-a---           2020/12/4    23:11             21 rename.bat
+-a---            2007/4/4     8:45           7351 ReviewProductOrPartFTA.catvbs
+-a---           2005/6/22    17:53           5567 SelectBrokenConstaints.catvbs
+-a---           2013/5/10    20:15          13638 Stairs.catvbs
+-a---          2020/10/29    13:17             93 TypeName.CATScript
+-a---            2017/2/1     6:00            270 UpgradeActiveDocumentMacro.CATScript
+-a---           2017/6/27    16:56           1232 VB_INSTANTIATE_UDF.CATScript
+-a---           2013/3/30     0:37            652 VBScript-InputSurface-OutputVerticesasPoints.CATScript
 
 
-//  public interface CATIString
-ArrayList DistanceStr2List(string str);
-bool IsIncludeLetter(string str);
 
-//  public interface CATIUDF
-AnyObject InstantiateUDFWithOneAxisSystem(MECMOD.Part part, string pwname, string iname, string iversion, AxisSystem AxisSystem);
-AnyObject InstantiateUDFWithTwoAxisSystem(MECMOD.Part part, string pwname, string iname, string iversion, AxisSystem AxisSystem1, AxisSystem AxisSystem2);
+d----           2021/7/26    23:20                ACAD
+da---          2020/11/21    22:21                AssemblyConstraints
+da---          2020/11/21    22:21                Block
+da---          2020/11/21    22:21                Bridge_For_YMA_Code_20190429
+da---          2020/11/21    22:21                CATIA-vba-最小包围
+da---          2020/11/21    22:21                ColorFilter
+da---          2020/11/21    22:21                ConstructionAdministration
+da---          2020/11/21    22:21                CostEstimation
+da---          2020/11/21    22:21                DoorOrWindowDataSheets
+da---          2020/11/21    22:21                DoorsAndWindows
+da---          2020/11/21    22:21                DP_API
+da---          2020/11/21    22:21                DrawingGeneration
+da---          2020/11/21    22:21                DWGImport
+da---          2020/11/21    22:21                excel2surface
+da---          2020/11/21    22:21                ExportSlab
+da---          2020/11/21    22:21                File_Dir_ManagementV2
+da---          2020/11/21    22:21                FrameTitleBlock
+da---          2020/11/21    22:21                FTA
+da---          2020/11/21    22:21                GridFactory
+da---          2020/11/21    22:21                MultiEdit
+da---          2020/11/21    22:21                PartList
+da---          2020/11/21    22:21                PartNumber
+da---          2020/11/21    22:21                PowerCopy
+da---          2020/11/21    22:21                qhull
+da---          2020/11/21    22:21                SectionDrawing
+da---          2020/11/21    22:21                ShellExpensionButts
+da---          2020/11/21    22:21                SmarTeam
+da---          2020/11/21    22:21                Solar_Render_Tool
+da---          2020/11/21    22:21                Solar_Render_Tool_V0R2
+da---           2021/2/11     0:33                sucdri_bridge
+da---          2020/11/21    22:21                SurfaceExtractions
+da---          2020/11/21    22:21                UserFeature
+da---          2020/11/21    22:21                Using_Attributes
+da---          2020/11/21    22:21                Using_ColorFilter
+da---          2020/11/21    22:21                Using_Proxy
+-a---          2020/11/21    22:21         163840 3dtags.catvba
+-a---          2020/11/21    22:21         147456 AngleReference_R4.catvba
+-a---          2020/11/21    22:21         131072 Animation.catvba
+-a---          2020/11/21    22:21         720896 AnimForm.catvba
+-a---          2020/11/21    22:21         180224 Annotations.catvba
+-a---          2020/11/21    22:21         147456 AnSSearch_V0R2.catvba
+-a---          2020/11/21    22:21         163840 AppendLengthsFromAxis_V0R1.catvba
+-a---          2020/11/21    22:21         147456 ArcBeamFactoryVB.catvba
+-a---          2020/11/21    22:21         131072 ArcContourOpnFactoryVB.catvba
+-a---          2020/11/21    22:21         212992 ArcMemberExportVB1.catvba
+-a---          2020/11/21    22:21         131072 ArcSpaceFactoryVB.catvba
+-a---          2020/11/21    22:21         180224 ArcViews.catvba
+-a---          2020/11/21    22:21         423424 asset.catvba
+-a---            2015/9/5    20:02        1458176 AutoDP.catvba
+-a---          2020/11/21    22:21         311296 AutomatedPowerCopy_V0R1.catvba
+-a---          2020/11/21    22:21         393216 AutomatedPowerCopy_V0R2.catvba
+-a---          2020/11/21    22:21         357376 AutomatedPowerCopy_V0R2b.catvba
+-a---          2020/11/21    22:21         393216 AutomatedPowerCopy_V0R3.1.catvba
+-a---            2008/5/5    16:32         393216 AutomatedPowerCopy_V0R3.catvba
+-a---          2020/11/21    22:21         196608 BatchCATPartFromCATProduct_V0R1.catvba
+-a---          2020/11/21    22:21         196608 BatchCATPartFromCATProduct_V0R2.catvba
+-a---          2020/11/21    22:21         491520 BatchExtrusion.catvba
+-a---          2020/11/21    22:21         196608 BatchPartNumberRename_V0R2.catvba
+-a---          2020/11/21    22:21         147456 BatchUnfold.catvba
+-a---          2020/11/21    22:21          84992 BodyViews.catvba
+-a---          2020/11/21    22:21         146432 Browser.catvba
+-a---          2020/11/21    22:21         229376 CATIASORT_New.catvba
+-a---          2020/11/21    22:21         180224 CATIASORT.catvba
+-a---          2020/11/21    22:21         180224 ChangeParameter.catvba
+-a---           2019/6/23    11:08         138752 CircleOnPoints.catvba
+-a---          2020/11/21    22:21          79872 Closed_Profile.catvba
+-a---          2020/11/21    22:21         212992 ColorFilter.catvba
+-a---          2020/11/21    22:21         212992 ColOutput.catvba
+-a---          2020/11/21    22:21         147456 ColumnsAndBeams.catvba
+-a---          2020/11/21    22:21         198144 ComponentRemovalByIntersection_V0R1.catvba
+-a---          2020/11/21    22:21         573440 ConstructionAdministration.catvba
+-a---          2020/11/21    22:21          98304 ConvertDatumPtsToLive.catvba
+-a---          2020/11/21    22:21          98304 Copy and Paste from Part to Part.catvba
+-a---          2005/10/31    13:21           4168 CreateFillInSurfaceArray.bas
+-a---          2005/10/25    18:41           3415 CreatePointsCurvesSweptSurface.bas
+-a---           2005/11/1    15:49           3233 CreateUserDefinedPlanesOnCurve.bas
+-a---           2011/8/24    21:28         163840 CurvatureAnalysis.catvba
+-a---          2020/11/21    22:21         215040 CurveOptimizerSetup_V0R1.catvba
+-a---          2020/11/21    22:21         229376 CurveOptimizerSetup_V0R3.catvba
+-a---          2011/12/30    18:04       28358551 Custom UDF-pattern - part 1 - YouTube.flv
+-a---          2020/11/21    22:21         327680 Datumizer.catvba
+-a---          2020/11/21    22:21         131072 DeleteObjByLength.catvba
+-a---          2020/11/21    22:21         169472 DELMIA_XUS_MAIN.catvba
+-a---          2020/11/21    22:21         131072 DevSurfFactory.catvba
+-a---          2020/11/21    22:21         180224 Diagonalizer_Web_V0R1.catvba
+-a---          2020/11/21    22:21         229376 DoorOrWindowDataSheet.catvba
+-a---          2020/11/21    22:21         262144 DoorOrWindowDataSheetR2toR3.catvba
+-a---          2020/11/21    22:21         147456 Drawing_All.catvba
+-a---          2020/11/21    22:21          81920 DwgImp.catvba
+-a---          2020/11/21    22:21         119296 EditNames.catvba
+-a---            2008/4/1    12:07         360448 ExcelProductStructure_V0R2.catvba
+-a---          2020/11/21    22:21         114688 ExIFCobjects.catvba
+-a---          2020/11/21    22:21         114688 ExpDWGobjs.catvba
+-a---          2020/11/21    22:21         196608 Export Spot Information for Ruixiang.catvba
+-a---          2020/11/21    22:21         212992 ExportSlab.catvba
+-a---          2020/11/21    22:21         491520 ExportViews_V0R2.catvba
+-a---          2020/11/21    22:21         491520 ExportViews.catvba
+-a---          2020/11/21    22:21         491520 ExtractDrawings.catvba
+-a---          2020/11/21    22:21         344064 Extractor_Units.catvba
+-a---          2020/11/21    22:21         111104 ExtRefSetting.catvba
+-a---           2021/5/13    23:37         196608 FacadeDesign.catvba
+-a---          2020/11/21    22:21         196608 FEMFactory.catvba
+-a---          2020/11/21    22:21          98304 File Save.catvba
+-a---          2020/11/21    22:21       13484032 file_cleanup.catvba
+-a---            2021/5/8    22:55         163840 File_Dir_Management.catvba
+-a---           2021/4/26    23:31         180736 File_Dir_ManagementV2.catvba
+-a---          2020/11/21    22:21         180224 FileBrowser (2).catvba
+-a---          2020/11/21    22:21         180224 FileBrowser.catvba
+-a---          2020/11/21    22:21         395264 FinishesGenerator (2).catvba
+-a---          2020/11/21    22:21         395264 FinishesGenerator.catvba
+-a---          2020/11/21    22:21         395264 FormworkGenerator (2).catvba
+-a---          2020/11/21    22:21         395264 FormworkGenerator.catvba
+-a---          2020/11/21    22:21         131072 GeneratePublications_V0R1.catvba
+-a---          2020/11/21    22:21         131072 GeneratePublications_V0R2.catvba
+-a---          2020/11/21    22:21          84480 GenerateUVPts.catvba
+-a---          2020/11/21    22:21         274944 GenerativeParameters.catvba
+-a---           2009/4/28    10:33            166 GeodesicCrv.CATGScript
+-a---          2020/11/21    22:21         131072 GetTimeStamp.catvba
+-a---          2020/11/21    22:21          81920 GSD_CAAGsiCreateStair.xls
+-a---          2020/11/21    22:21          65024 GSD_PointSplineLoftFromExcel_BeforeV5R12.xls
+-a---          2020/11/21    22:21          76288 GSD_PointSplineLoftFromExcel.xls
+-a---          2020/11/21    22:21         131072 GTCAttReporter.catvba
+-a---          2020/11/21    22:21          65536 ImportIfc.catvba
+-a---          2020/11/21    22:21          81920 InstanceRenamer_V0R1.catvba
+-a---           2009/1/10    15:40            170 IsoU.CATGScript
+-a---           2009/1/10    15:41            170 IsoV.CATGScript
+-a---          2020/11/21    22:21         245760 KP_STANDARD_SCRIPTS.catvba
+-a---           2011/9/10    20:59         344064 LabelDrawing_V7.catvba
+-a---          2020/11/21    22:21         171008 LineBesector_V0R1.catvba
+-a---          2020/11/21    22:21         171008 LineBesector_V0R2.catvba
+-a---          2020/11/21    22:21         131072 LinkDitto.catvba
+-a---          2020/11/21    22:21         180224 LoadReplaceLinks.catvba
+-a---          2020/11/21    22:21         294912 LVMH.catvba
+-a---           2019/5/16    16:31           6318 MacroGenViewSurBody_SupportPlaneinUnfoldbody.txt
+-a---          2020/11/21    22:21         163840 MemberOffsets.catvba
+-a---          2020/11/21    22:21         557056 MergeDMU.catvba
+-a---          2020/11/21    22:21         172544 Mesh.catvba
+-a---          2020/11/21    22:21         114688 ModelUpgrade.catvba
+-a---          2005/10/31    19:17           3961 Mohamed_Macrofile.bas
+-a---           2009/11/3    11:04         350208 MultiSplit_V0R10.catvba
+-a---          2020/11/21    22:21         344064 MultiSplit_V0R8.catvba
+-a---          2020/11/21    22:21         491520 MultiSplit.catvba
+-a---          2020/11/21    22:21         131072 MultiSupportBeam.catvba
+-a---          2020/11/21    22:21         491520 MyVBA.catvba
+-a---          2020/11/21    22:21         180224 PanelAssembly.catvba
+-a---          2020/11/21    22:21         163840 PanelPostChecker_V0.catvba
+-a---          2020/11/21    22:21         180224 PanelPostChecker_V0R2.catvba
+-a---          2020/11/21    22:21         376832 Partinator_V0R1.catvba
+-a---           2009/1/29    18:21         376832 Partinator_V0R2.catvba
+-a---          2020/11/21    22:21         491520 PlanesFromSections.catvba
+-a---          2020/11/21    22:21         146432 PointInstantiatorFromExcelR2 (2).catvba
+-a---          2020/11/21    22:21         163840 PointInstantiatorFromExcelR2.catvba
+-a---          2020/11/21    22:21         131072 PointInstantiatorFromExcelR5.catvba
+-a---          2020/11/21    22:21         245760 PowerCGR_V2-0.catvba
+-a---          2020/11/21    22:21         114688 Product_Dumb_Down (2).catvba
+-a---          2020/11/21    22:21         114688 Product_Dumb_Down.catvba
+-a---           2014/1/11    22:19         491520 QHull_Mesh_Generation.catvba
+-a---          2020/11/21    22:21         153950 QHull_Mesh_Generation.zip
+-a---          2020/11/21    22:21          91409 qhull-1.0.tar.gz
+-a---          2020/11/21    22:21        3229784 qhull-2019.1.zip
+-a---           2019/7/17    18:14         311296 RAILWAY_BEAM_CREATE_INTERNAL_BOX.catvba
+-a---          2020/11/21    22:21          81920 ReactionsForChangingColor.catvba
+-a---          2020/11/21    22:21         114688 RenameGeometryInPart_V0.catvba
+-a---          2020/11/21    22:21          86528 RenameTree (2).catvba
+-a---          2020/11/21    22:21          86528 RenameTree.catvba
+-a---          2020/11/21    22:21         147456 RFL_STANDARD_SCRIPTS.catvba
+-a---          2020/11/21    22:21         212992 SlabFactory.catvba
+-a---          2020/11/21    22:21         196608 Slider.catvba
+-a---          2020/11/21    22:21         481792 Solar_Render_Tool_V0R2.catvba
+-a---          2020/11/21    22:21         163840 sun.catvba
+-a---          2020/11/21    22:21         175616 surface.catvba
+-a---          2020/11/21    22:21         131072 TessFactory.catvba
+-a---          2020/11/21    22:21         212992 Test - 副本.catvba
+-a---            2008/1/5    12:57         212992 TitleBlockGeneration_V0R1.catvba
+-a---          2020/11/21    22:21         166912 TopoSurfaceMaker_V0R1.catvba
+-a---          2020/11/21    22:21         131072 TraverseDoorWindows.catvba
+-a---          2011/12/24    16:28       11965253 Tutorial 06 Replacing a control point with a spline - YouTube.flv
+-a---          2011/12/24    16:37       22203921 Tutorial 07 Creating a grid of boxes with UDFs - YouTube.flv
+-a---          2011/12/24    16:27       17169416 Tutorial02_Modeling_A_Table.mp4 - YouTube.flv
+-a---          2020/11/21    22:21         475136 UniformatCostEstimation (2).catvba
+-a---          2020/11/21    22:21         475136 UniformatCostEstimation.catvba
+-a---          2020/11/21    22:21         278528 VBA_01.catvba
+-a---          2020/11/21    22:21         737280 VBA_MAIN.catvba
+-a---          2020/11/21    22:21          98304 VBA_RENAME.catvba
+-a---          2020/11/21    22:21         131072 VBA.catvba
+-a---          2020/11/21    22:21         196608 VBAForBridgeDesign.catvba
+-a---          2020/11/21    22:21         147456 VBAHIDESHOW.catvba
+-a---            2021/2/8    13:26         114688 VBAProject1 (2).catvba
+-a---          2020/11/21    22:21         196608 VBAProject1 (3).catvba
+-a---           2021/12/3    15:34         513024 VBAProject1.catvba
+-a---          2020/11/21    22:21         180224 VBARename.catvba
+-a---          2020/11/21    22:21         196608 VBAXMLexample (2).catvba
+-a---          2020/11/21    22:21         196608 VBAXMLexample.catvba
+-a---          2020/11/21    22:21         147456 Walls.catvba
+-a---          2020/11/21    22:21         376832 WANDA_01.catvba
+-a---          2020/11/21    22:21         135680 WriteTree (2).catvba
+-a---          2020/11/21    22:21         135680 WriteTree.catvba
+-a---           2016/6/30    16:06         147456 xus (2).catvba
+-a---          2020/11/21    22:21         819200 XUS_AUTOMATIONS.catvba
+-a---          2020/11/21    22:21         327680 XUS-AUTOMATION-VBA.catvba
+-a---           2021/7/30    17:11         180224 xus.catvba
+-a---          2020/11/21    22:21         180736 XYZTextAnnotations_V0R1.catvba
+-a---          2020/11/21    22:21         327680 XYZTextAnnotations_V0R2.catvba
 
-    
 
 
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---           2021/11/4     1:34           7797 CAAGetGeometricFromFeature.cpp
+-a---           2021/11/4     1:34           3594 CAAGetPartCore.cpp
+-a---           2021/11/4     1:34           2605 CAAHighlight.cpp
+-a---           2021/11/4     1:34           1103 CAAMessage.cpp
+-a---           2021/11/4     1:34           9948 CAAObjectOperating.cpp
 
-```
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---            2021/6/5     1:29           1514 AddStartUsedHistory.cpp
+-a---            2021/6/5     1:29           1758 CAACopyGeoObjectFromOneContainerToAnotherContainer.cpp
+-a---            2021/6/5     1:30            399 CAADelete.cpp
+-a---            2021/6/5     1:30            592 CAAGetBody.cpp
+-a---            2021/6/5     1:30           1330 CAAGetCurveTypeFromMeasurableInContext.cpp
+-a---            2021/6/5     1:30            770 CAAGetDistance.cpp
+-a---            2021/6/5     1:30           3803 CAAGetGeometricFromFeature.cpp
+-a---            2021/6/5     1:30            507 CAAGetGeometricType.cpp
+-a---            2021/6/5     1:30            615 CAAGetLength.cpp
+-a---            2021/6/5     1:30           2244 CAAGetPrtContainer.cpp
+-a---           2021/11/6    22:32           2313 CAAGsiSearchFeatureFromName.cpp
+-a---            2021/6/4    19:16            725 CAAHideElements.cpp
+-a---            2021/6/5     2:13           2172 CAAHighlight.cpp
+-a---          2021/11/10     0:19          50757 CAAktService.cpp
+-a---            2021/6/5     1:30           2893 CAAMcaGetGeometry.cpp
+-a---            2021/6/5     1:31            597 CAAMessage.cpp
+-a---            2021/6/5     1:31            485 CAASetInsert.cpp
+-a---            2021/6/5     1:31           2536 CAASetObjectColor.cpp
+-a---            2021/6/5     1:31           2089 CAASetObjectHideOrShow.cpp
+-a---            2021/6/5     1:42            275 CAAUpdate.cpp
+-a---            2021/6/5     1:31            979 ChanceInstanceName.cpp
+-a---            2021/6/5     1:31            797 Close.cpp
+-a---            2021/6/5     1:31            502 CreateAngle.cpp
+-a---            2021/6/5     1:31           1964 CreateChildrenPrds.cpp
+-a---            2021/6/5     1:31            489 CreateDirection.cpp
+-a---            2021/6/5     1:31           1028 CreateDirectory.cpp
+-a---            2021/6/5     1:59            810 CreateDirectory1.cpp
+-a---            2021/6/5     1:31            502 CreateLength.cpp
+-a---            2021/6/5     1:31            489 CreateReal.cpp
+-a---            2021/6/5     1:31            421 DirExists.cpp
+-a---            2021/6/5     1:31            574 DisableString.cpp
+-a---            2021/6/5     1:31           1016 Featurize.cpp
+-a---            2021/6/5     1:32           4026 GetAxisBRep.cpp
+-a---            2021/6/5     1:46            559 GetDocumentFromPrd.cpp
+-a---            2021/6/5     1:32            664 GetElementListFromGeomSet.cpp
+-a---           2021/11/6    22:27            412 GetEnvValue.cpp
+-a---            2021/6/5     1:32            994 GetExcelFilesFromFolder.cpp
+-a---            2021/6/5     1:32            443 GetObjAlias.cpp
+-a---            2021/6/5     1:32           1279 GetPathFromPartNumber.cpp
+-a---            2021/6/5     1:32           1264 GetPrtContainer.cpp
+-a---            2021/6/5     1:32           2400 GetResourcePath.cpp
+-a---            2021/6/5     1:32           1090 GetRootProduct.cpp
+-a---            2021/6/5     1:32            628 GetRootProductFromDocument.cpp
+-a---            2021/6/5    12:52            126 HelloWorld.cpp
+-a---            2021/6/5     1:32           1347 InitSession.cpp
+-a---            2021/6/5     1:32           1226 IsProduct.cpp
+-a---            2021/6/5     1:32           1954 LengthJudgeColor.cpp
+-a---            2021/6/5     1:33            692 MessageOutputError.cpp
+-a---            2021/6/5     1:33            692 MessageOutputInfo.cpp
+-a---            2021/6/5     1:33            700 MessageOutputWarning.cpp
+-a---            2021/6/5     1:33           1143 ModifyColor.cpp
+-a---            2021/6/5     1:33           1884 New.cpp
+-a---            2021/6/5     1:33           1564 Open.cpp
+-a---            2021/6/5     1:33            899 Save.cpp
+-a---            2021/6/5     1:33           1032 SaveModuleTree.cpp
+-a---            2021/6/5     1:33           1433 SaveProduct.cpp
+-a---            2021/6/5     1:33           1037 SaveSingleProduct.cpp
+-a---            2021/6/5     1:33            413 SetObjAlias.cpp
+-a---            2021/6/5     1:33            550 StringBuildFromChar.cpp
+-a---            2021/6/5     1:33            405 StringConvertToChar.cpp
+-a---            2021/6/5     1:33            449 StringConvertToWChar.cpp
+-a---            2021/6/5     1:33            529 ThrowLastErrorMessage.cpp
+-a---            2021/6/5     1:33            520 WriteErrorLog.cpp
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---            2021/6/5    15:58           4507 CAAUDFOneAxis.cpp
