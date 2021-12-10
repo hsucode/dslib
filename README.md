@@ -1,37 +1,116 @@
-# ds3dxlib
+# 3DEXPERIENCE_Forms
 
-#### 介绍
-ds lib
+新增了基于达索 3DEXPERIENCE CATIA R2020x 的UI样式库
 
-#### 软件架构
-软件架构说明
+# Interface
 
+``` cs
 
-#### 安装教程
+```
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
-
-#### 使用说明
-
-1.  xxxx
-2.  xxxx
-3.  xxxx
-
-#### 参与贡献
-
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
+```
 
 
-#### 特技
+using HybridShapeTypeLib;
+using MECMOD;
+using System;
+using System.Collections;
+using INFITF;
 
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  Gitee 官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解 Gitee 上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是 Gitee 最有价值开源项目，是综合评定出的优秀开源项目
-5.  Gitee 官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  Gitee 封面人物是一档用来展示 Gitee 会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using KnowledgewareTypeLib;
+
+namespace CATObjectModelerLibrary
+{
+    public interface AECISteelBridge
+    {
+        //创建加强肋
+        ArrayList CreateRibBySurface(MECMOD.Part part, HybridShape isurface);
+
+    }
+
+    public interface CATAECIASPBBCushion
+    {
+        AnyObject InstantiateCushion(MECMOD.Part part, AnyObject UDF, string[] UDFValue, string[] UDFParametersName, string[] UDFParametersValue,string InputAxisName);
+        void InstantiateCushionInOneSet(Part part, AnyObject UDFSets, string AxisName,string GeoSetName);
+
+        void InstallCushion(ArrayList BeamGeoList);
+       
+    }
+    public interface CATAECAlignment
+    {
+        HybridShape CreatNewRoadBoundary(HybridShape OriCurve, HybridShape CenterCurve, ArrayList CenterAlignmentAxisSystemesList,ArrayList CheckResultBoolean);
+    }
+
+    //public interface AECAxisSystems
+    //{
+    //    void CreatAxisFromExcel();
+    //    void ExportAxisAngleAndHeight();
+
+    //}
+
+    //public interface InstantiateUDF
+    //{
+    //    string UdfName { get; set; }
+    //}
+
+
+    //public interface AECCivilRoad
+    //{
+    //    void CreatRoadBoundary();
+    //}
+
+
+    public interface CATIRailwayBridgeModeler
+    {
+        void CreateInternalBeamSpace(Part part, HybridShape Curve, HybridShape bottomCrv, HybridShape StartPoint, OrderedGeometricalSet hb, out ArrayList iPlanelist);
+        HybridShape CreatePolyLineBaseOnPlane(HybridShapeFactory hsf, HybridShape iPlane, HybridShape iPt, OrderedGeometricalSet hb);
+        HybridShape CreateLoftFromMultiSection(Part part, ArrayList iSectionlist, OrderedGeometricalSet hb);
+        HybridShape CreateLoftFromMultiSectionBaseOnUDF(Part part, ArrayList iUDFset, OrderedGeometricalSet hb, HybridShape ispline, int CouplingCount);
+        void CreateInternalSection(Part part, HybridShape iTopCurve, HybridShape iBottomCurve, HybridShape iPlane, OrderedGeometricalSet DestinationHybridBody);
+        AnyObject InstantiateUDFInternalSection(MECMOD.Part part, string pwname, string iname, string iversion, HybridShape iTopCurve, HybridShape iBottomCurve, HybridShape iPlane);
+        void CreatePanelFromList(Part part, ArrayList DistanceList, HybridShape iPlane, OrderedGeometricalSet destinationHB, bool dir, HybridShape topcurve, HybridShape bottomcurve);
+
+    }
+
+    public interface CATRailWayStandardBeamBridge
+    {
+
+        void CreateStandardBeam(Part part, HybridShape iStartPoint, HybridShape iSurface, HybridShape iCurve, HybridShape iPlanerCurve, HybridBody iOHB, double iDistance1, double iDistance2, double iDistance3, double iDistance4);
+
+        HybridShape CreateSectionFromPointList(HybridShapeFactory hsf);
+    }
+
+
+
+    public interface CATIRailwayBridgeModeler1
+    {
+
+        void CreateStandardBeam(Part part, HybridShape iStartPoint, HybridShape iSurface, HybridShape iCurve, HybridShape iPlanerCurve, HybridBody iOHB, double iDistance1, double iDistance2, double iDistance3, double iDistance4);
+
+        HybridShape CreateSectionFromPointList(HybridShapeFactory hsf);
+
+    }
+
+
+    public interface CATRailWayStandardBeamBridge1
+    {
+
+        void CreateInternalShapesT1(Part part, ArrayList distanceArray, bool dircheck, HybridShape opt);
+        void CreateInternalShapesT2(Part part, ArrayList distanceArray, bool dircheck, HybridShape opt);
+        void CreateInternalShapesT3(Part part, ArrayList distanceArray, bool dircheck, HybridShape opt);
+
+
+
+        void CreateStandardBeam(Part part, HybridShape iStartPoint, HybridShape iSurface, HybridShape iCurve, HybridShape iPlanerCurve, HybridBody iOHB, double iDistance1, double iDistance2, double iDistance3, double iDistance4);
+
+        HybridShape CreateSectionFromPointList(HybridShapeFactory hsf);
+    }
+}
+
+
+```
