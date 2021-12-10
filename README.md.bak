@@ -107,7 +107,7 @@ void GetUDFConfiguration(string XMLPath, string Type, ref string PartName, ref s
 //  public interface CATIString
 ArrayList DistanceStr2List(string str);
 bool IsIncludeLetter(string str);
-
+    
 //  public interface CATIUDF
 AnyObject InstantiateUDFWithOneAxisSystem(MECMOD.Part part, string pwname, string iname, string iversion, AxisSystem AxisSystem);
 AnyObject InstantiateUDFWithTwoAxisSystem(MECMOD.Part part, string pwname, string iname, string iversion, AxisSystem AxisSystem1, AxisSystem AxisSystem2);
