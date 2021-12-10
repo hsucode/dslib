@@ -1,37 +1,114 @@
-# ds3dxlib
 
-#### 介绍
-ds lib
+``` cs
 
-#### 软件架构
-软件架构说明
+//创建加强肋
+ArrayList CreateRibBySurface(MECMOD.Part part, HybridShape isurface);
+
+AnyObject InstantiateCushion(MECMOD.Part part, AnyObject UDF, string[] UDFValue, string[] UDFParametersName, string[] UDFParametersValue,string InputAxisName);
+void InstantiateCushionInOneSet(Part part, AnyObject UDFSets, string AxisName,string GeoSetName);
+
+void InstallCushion(ArrayList BeamGeoList);
+
+HybridShape CreatNewRoadBoundary(HybridShape OriCurve, HybridShape CenterCurve, ArrayList CenterAlignmentAxisSystemesList,ArrayList CheckResultBoolean);
+
+// void CreatAxisFromExcel();
+// void ExportAxisAngleAndHeight();
+// interface CATIRailwayBridgeModeler
+
+void CreateInternalBeamSpace(Part part, HybridShape Curve, HybridShape bottomCrv, HybridShape StartPoint, OrderedGeometricalSet hb, out ArrayList iPlanelist);
+HybridShape CreatePolyLineBaseOnPlane(HybridShapeFactory hsf, HybridShape iPlane, HybridShape iPt, OrderedGeometricalSet hb);
+HybridShape CreateLoftFromMultiSection(Part part, ArrayList iSectionlist, OrderedGeometricalSet hb);
+HybridShape CreateLoftFromMultiSectionBaseOnUDF(Part part, ArrayList iUDFset, OrderedGeometricalSet hb, HybridShape ispline, int CouplingCount);
+void CreateInternalSection(Part part, HybridShape iTopCurve, HybridShape iBottomCurve, HybridShape iPlane, OrderedGeometricalSet DestinationHybridBody);
+AnyObject InstantiateUDFInternalSection(MECMOD.Part part, string pwname, string iname, string iversion, HybridShape iTopCurve, HybridShape iBottomCurve, HybridShape iPlane);
+void CreatePanelFromList(Part part, ArrayList DistanceList, HybridShape iPlane, OrderedGeometricalSet destinationHB, bool dir, HybridShape topcurve, HybridShape bottomcurve);
+
+// interface CATRailWayStandardBeamBridge
+  
+void CreateStandardBeam(Part part, HybridShape iStartPoint, HybridShape iSurface, HybridShape iCurve, HybridShape iPlanerCurve, HybridBody iOHB, double iDistance1, double iDistance2, double iDistance3, double iDistance4);
+
+HybridShape CreateSectionFromPointList(HybridShapeFactory hsf);
+
+void CreateStandardBeam(Part part, HybridShape iStartPoint, HybridShape iSurface, HybridShape iCurve, HybridShape iPlanerCurve, HybridBody iOHB, double iDistance1, double iDistance2, double iDistance3, double iDistance4);
+
+HybridShape CreateSectionFromPointList(HybridShapeFactory hsf);
+
+void CreateInternalShapesT1(Part part, ArrayList distanceArray, bool dircheck, HybridShape opt);
+void CreateInternalShapesT2(Part part, ArrayList distanceArray, bool dircheck, HybridShape opt);
+void CreateInternalShapesT3(Part part, ArrayList distanceArray, bool dircheck, HybridShape opt);
+
+void CreateStandardBeam(Part part, HybridShape iStartPoint, HybridShape iSurface, HybridShape iCurve, HybridShape iPlanerCurve, HybridBody iOHB, double iDistance1, double iDistance2, double iDistance3, double iDistance4);
+
+HybridShape CreateSectionFromPointList(HybridShapeFactory hsf);
 
 
-#### 安装教程
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+MECMOD.Part GetContainPart(INFITF.AnyObject obj);
+Application InitializationCATIA();
+Application InitializationEXCEL();
+// string color { get; set; }
 
-#### 使用说明
+Selection GetSelection();
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+// public interface CATIGeometry
 
-#### 参与贡献
+void SayHi(string me);
+AxisSystem CreateAxisAlongCurve(Part Part, HybridShape Curve, HybridShape Point, double AxisRotateAngle);
+INFITF.AnyObject LoadExtRef(INFITF.Selection sel, INFITF.AnyObject OldObj, MECMOD.HybridBody ExtRefSet);
+Boolean CheckIntersection(Object Object1, Object Object2, MECMOD.Part Part);
+void GetAllPlnFromAxis(Part part, MECMOD.AxisSystem refaxis, out HybridShape xypln, out HybridShape yzpln, out HybridShape zxpln);
 
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
+HybridShape GetCOfGPoint(MECMOD.Part part, INFITF.AnyObject surface);
+ArrayList GetUDFParamters(MECMOD.HybridShapeInstance udf, ref string ValueList);
+void ExtractUDFAxisAndRefAxis(MECMOD.Part part, HybridShapeInstance udf, AxisSystem refaxis, out HybridShapePointCoord pt, out HybridShape xypln, out HybridShape yzpln, out HybridShape zxpln);
+double[] GetUDFOutputAxisCoord(MECMOD.Part part, MECMOD.HybridShapeInstance udf, INFITF.AnyObject RefAxisSystem, string OutputName = "AXIS");
+double[] GetUDFOutputAxisCoord(MECMOD.Part part, MECMOD.ShapeInstance udf, INFITF.AnyObject RefAxisSystem, string OutputName = "AXIS");
+INFITF.AnyObject CompareTwoGeometrySets(INFITF.AnyObject A, INFITF.AnyObject B);
+Boolean CheckCreateLineFormPointToSurface(Object Point, Object Surface, MECMOD.Part Part);
+ArrayList CreatePointsFromList(Object icrv, ArrayList idistance,MECMOD.Part part);
 
 
-#### 特技
 
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  Gitee 官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解 Gitee 上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是 Gitee 最有价值开源项目，是综合评定出的优秀开源项目
-5.  Gitee 官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  Gitee 封面人物是一档用来展示 Gitee 会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+
+//  public interface CATIMeasure
+
+double GetDistance(INFITF.AnyObject obj1, INFITF.AnyObject obj2);
+double GetLineLength(INFITF.AnyObject obj);
+double GetCurveLength(INFITF.AnyObject obj);
+double GetAngle(INFITF.AnyObject obj1, INFITF.AnyObject obj2);
+double GetArea(INFITF.AnyObject surface);
+double GetVolume(INFITF.AnyObject Volumesurface);
+    
+// public interface CATIParameters
+
+void SetAttributeStringToObject(MECMOD.Part part, INFITF.AnyObject obj, string name, string value);
+void SetAttributeBooleanToObject(MECMOD.Part part, HybridShape obj, string name, Boolean value);
+void SetAttributeLengthToObject(MECMOD.Part part, INFITF.AnyObject obj, string name, double value);
+void SetAttributeAngleToObject(MECMOD.Part part, INFITF.AnyObject obj, string name, double value);
+void SetAttributeVolumeToObject(MECMOD.Part part, INFITF.AnyObject obj, string name, double value);
+void ChangeUDFParameters(HybridShapeInstance udf, string ParameterName, string ParameterValue);
+void ExportUDFParms(int xlsHeaderIndex, int startExcelIndex, Microsoft.Office.Interop.Excel.Worksheet xlsheet, MECMOD.HybridShapeInstance udf);
+void ExportUDFParms(int xlsHeaderIndex, int startExcelIndex, Microsoft.Office.Interop.Excel.Worksheet xlsheet, MECMOD.ShapeInstance udf);
+void ImportUDFParmsFormExcel(int xlsHeaderIndex, int startExcelIndex, Microsoft.Office.Interop.Excel.Worksheet xlsheet, MECMOD.HybridShapeInstance udf, object unit);
+void ImportUDFParmsFormExcel(int xlsHeaderIndex, int startExcelIndex, Microsoft.Office.Interop.Excel.Worksheet xlsheet, MECMOD.ShapeInstance udf, object unit);
+void ExportUDFParms(int xlsHeaderIndex, int startExcelIndex, Microsoft.Office.Interop.Excel.Worksheet xlsheet, HybridBody udfset);
+void ExportUDFParms(int xlsHeaderIndex, int startExcelIndex, Microsoft.Office.Interop.Excel.Worksheet xlsheet, OrderedGeometricalSet udfset);
+void ExportUDFParms(int xlsHeaderIndex, int startExcelIndex, Microsoft.Office.Interop.Excel.Worksheet xlsheet, Body udfset);
+void ChangeUDFParmsFormExcel(int xlsHeaderIndex, int startExcelIndex, Microsoft.Office.Interop.Excel.Worksheet xlsheet, HybridBody udfset);
+void ChangeUDFParmsFormExcel(int xlsHeaderIndex, int startExcelIndex, Microsoft.Office.Interop.Excel.Worksheet xlsheet, MECMOD.OrderedGeometricalSet udfset);
+void GetUDFConfiguration(string XMLPath, string Type, ref string PartName, ref string PartiVision, ref string PWName);
+
+
+//  public interface CATIString
+ArrayList DistanceStr2List(string str);
+bool IsIncludeLetter(string str);
+
+//  public interface CATIUDF
+AnyObject InstantiateUDFWithOneAxisSystem(MECMOD.Part part, string pwname, string iname, string iversion, AxisSystem AxisSystem);
+AnyObject InstantiateUDFWithTwoAxisSystem(MECMOD.Part part, string pwname, string iname, string iversion, AxisSystem AxisSystem1, AxisSystem AxisSystem2);
+
+    
+
+
+
+```
